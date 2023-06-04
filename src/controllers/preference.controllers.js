@@ -51,8 +51,7 @@ const insertPenyakit = async (req, res) => {
   const id_user = req.cookies.id_user;
   try {
     const { penyakit } = req.body;
-    sql = `INSERT INTO user_penyakit (id_user , id_penyakit) VALUES ('${id_user}','${penyakit}')`;
-    await db.query(sql);
+    await service.insertPenyakit(id_user, penyakit);
 
     return res.status(200).json({
       statusCode: 200,
@@ -70,8 +69,8 @@ const insertFood = async (req, res) => {
   const id_user = req.cookies.id_user;
   try {
     const { makanan } = req.body;
-    sql = `INSERT INTO user_food (id_user , id_food) VALUES ('${id_user}','${makanan}')`;
-    await db.query(sql);
+
+    await service.insertFood(id_user, makanan);
 
     return res.status(200).json({
       statusCode: 200,
@@ -89,13 +88,49 @@ const insertCondition = async (req, res) => {
   const id_user = req.cookies.id_user;
   try {
     const { kondisi } = req.body;
-    sql = `INSERT INTO user_condition (id_user , id_condition) VALUES ('${id_user}','${kondisi}')`;
-    await db.query(sql);
+
+    await service.insertKondisi(id_user, kondisi);
 
     return res.status(200).json({
       statusCode: 200,
       status: "success",
       message: "Success Input Data Preference User",
+    });
+  } catch (error) {
+    return res.json({
+      status: "error",
+      message: `${error}`,
+    });
+  }
+};
+const insertPreference = async (req, res) => {
+  const id_user = req.cookies.id_user;
+  const data = req.body;
+  try {
+    await service.insertPreference(id_user, data);
+    return res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Success Input Data Preference User",
+    });
+  } catch (error) {
+    return res.json({
+      status: "error",
+      message: `${error}`,
+    });
+  }
+};
+const updatePreference = async (req, res) => {
+  const id_user = req.cookies.id_user;
+  const data = req.body;
+  try {
+    await service.deletePreference(id_user);
+    await service.insertPreference(id_user, data);
+
+    return res.status(200).json({
+      statusCode: 200,
+      status: "success",
+      message: "Success Update Data Preference User",
     });
   } catch (error) {
     return res.json({
@@ -111,4 +146,6 @@ module.exports = {
   insertFood,
   getPreference,
   getDataPreference,
+  insertPreference,
+  updatePreference,
 };
