@@ -20,6 +20,8 @@ route.delete("/profile/delete", verifyToken, updateModule.deleteProfile);
 
 // Preference Routes
 route.get("/preference", verifyToken, preferenceModule.getPreference);
+route.post("/preference", verifyToken, preferenceModule.insertPreference);
+route.post("/preference/update", verifyToken, preferenceModule.updatePreference);
 // Preference Data
 route.get("/preference/data", verifyToken, preferenceModule.getDataPreference);
 // Category Penyakit

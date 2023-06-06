@@ -8,6 +8,7 @@ const port = process.env.PORT || 3000;
 
 const userRoutes = require("./src/routes/user.routes.js");
 const productRoutes = require("./src/routes/product.routes.js");
+const qrcodeRoutes = require("./src/routes/qrcode.routes");
 
 const app = express();
 env.config();
@@ -36,6 +37,7 @@ app.use(multerMid.single("file"));
 // Handling route
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/qrcode", qrcodeRoutes);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
