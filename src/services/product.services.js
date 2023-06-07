@@ -106,8 +106,9 @@ const create = async (products, id_user) => {
         message: "Product Name Incorrect",
       };
     }
+
     const query1 = `INSERT INTO produk (nama_produk, foto_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?,?)`;
-    const result1 = await db.query(query1, { replacements: [products[i], null, null, false, id_user, result[0][0].id_detail] });
+    const result1 = await db.query(query1, { replacements: [products[i], "https://storage.googleapis.com/staging_product/default-profile.jpg", null, false, id_user, result[0][0].id_detail] });
 
     if (!result1) {
       return {
