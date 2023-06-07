@@ -1,15 +1,10 @@
-const { json } = require("body-parser");
 const db = require("../configs/db.configs");
 
 const getAllPenyakit = async (idUser) => {
   const sql = `
-    SELECT p.nama_penyakit , p.triger_penyakit FROM users AS u 
+    SELECT p.nama_penyakit , MIN(p.triger_penyakit) FROM users AS u 
     JOIN user_penyakit AS up ON u.id_user = up.id_user
     JOIN penyakit AS p ON up.id_penyakit = p.id_penyakit
-    JOIN user_food AS uf ON u.id_user = uf.id_user
-    JOIN food AS f ON uf.id_food = f.id_food
-    JOIN user_condition AS uc ON u.id_user = uc.id_user
-    JOIN kondisi c ON uc.id_condition = c.id_condition
     WHERE u.id_user = '${idUser}'
     GROUP BY p.nama_penyakit;
     `;
@@ -19,11 +14,7 @@ const getAllPenyakit = async (idUser) => {
 };
 const getAllKondisi = async (idUser) => {
   const sql = `
-    SELECT c.name_condition , c.triger_condition FROM users AS u 
-    JOIN user_penyakit AS up ON u.id_user = up.id_user
-    JOIN penyakit AS p ON up.id_penyakit = p.id_penyakit
-    JOIN user_food AS uf ON u.id_user = uf.id_user
-    JOIN food AS f ON uf.id_food = f.id_food
+    SELECT c.name_condition , MIN(c.triger_condition) FROM users AS u 
     JOIN user_condition AS uc ON u.id_user = uc.id_user
     JOIN kondisi c ON uc.id_condition = c.id_condition
     WHERE u.id_user = '${idUser}'
@@ -35,13 +26,9 @@ const getAllKondisi = async (idUser) => {
 };
 const getAllFood = async (idUser) => {
   const sql = `
-    SELECT f.name_food , f.triger_food FROM users AS u 
-    JOIN user_penyakit AS up ON u.id_user = up.id_user
-    JOIN penyakit AS p ON up.id_penyakit = p.id_penyakit
+    SELECT f.name_food , MIN(f.triger_food) FROM users AS u 
     JOIN user_food AS uf ON u.id_user = uf.id_user
     JOIN food AS f ON uf.id_food = f.id_food
-    JOIN user_condition AS uc ON u.id_user = uc.id_user
-    JOIN kondisi c ON uc.id_condition = c.id_condition
     WHERE u.id_user = '${idUser}'
     GROUP BY f.name_food;
     `;
