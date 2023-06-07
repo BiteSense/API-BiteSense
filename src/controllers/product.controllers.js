@@ -82,18 +82,11 @@ const uploadProductScan = async (req, res) => {
 
     const imageUrl = await uploadImage(file);
 
-    const { data } = await axios.get(
-      "http://0.0.0.0:8080/prediction",
-      { imageUrl: imageUrl },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const { data } = await axios.get("https://tf-bitesense-4q6q5fibya-et.a.run.app/prediction", { params: { url: imageUrl } });
+    const label = JSON.parse(data[1].body);
 
-    const result = await product.create(data.products, id_user);
-    res.cookie("jumlah_scan_produk", data.products.length);
+    const result = await product.create(label.text, id_user);
+    res.cookie("jumlah_scan_produk", label.text.length);
     res.status(result.statusCode).json(result);
   } catch (error) {
     res.json({

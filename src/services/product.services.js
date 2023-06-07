@@ -95,33 +95,25 @@ const findAllByFavorite = async (id_user) => {
 };
 
 const create = async (products, id_user) => {
-  if (products.length == 0) {
-    return {
-      statusCode: 404,
-      status: "error",
-      message: "Product not Found",
-    };
-  } else {
-    for (let i = 0; i < products.length; i++) {
-      const query = `SELECT id_detail from detail_produk WHERE nama_produk = ?`;
-      const result = await db.query(query, { replacements: [products[i].nama] });
+  for (let i = 0; i < products.length; i++) {
+    const query = `SELECT id_detail from detail_produk WHERE nama_produk = ?`;
+    const result = await db.query(query, { replacements: [products[i]] });
 
-      if (!result[0][0]) {
-        return {
-          statusCode: 404,
-          status: "error",
-          message: "Product Name Incorrect",
-        };
-      }
-      const query1 = `INSERT INTO produk (nama_produk, foto_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?,?)`;
-      const result1 = await db.query(query1, { replacements: [products[i].nama, products[i].image, null, false, id_user, result[0][0].id_detail] });
+    if (!result[0][0]) {
+      return {
+        statusCode: 404,
+        status: "error",
+        message: "Product Name Incorrect",
+      };
+    }
+    const query1 = `INSERT INTO produk (nama_produk, foto_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?,?)`;
+    const result1 = await db.query(query1, { replacements: [products[i], null, null, false, id_user, result[0][0].id_detail] });
 
-      if (!result1) {
-        return {
-          status: "error",
-          message: "Failed to Input Product",
-        };
-      }
+    if (!result1) {
+      return {
+        status: "error",
+        message: "Failed to Input Product",
+      };
     }
   }
 
