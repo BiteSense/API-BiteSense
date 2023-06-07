@@ -82,8 +82,8 @@ const uploadProductScan = async (req, res) => {
 
     const imageUrl = await uploadImage(file);
 
-    const { data } = await axios.post(
-      "http://localhost:4000/upload",
+    const { data } = await axios.get(
+      "http://0.0.0.0:8080/prediction",
       { imageUrl: imageUrl },
       {
         headers: {
