@@ -31,6 +31,7 @@ const registerUser = async (username, email, hashPassword) => {
   const result = await db.query(sql);
   return result;
 };
+
 const clearToken = async (id_user) => {
   const sql = `UPDATE users SET token = NULL WHERE id_user = '${id_user}'`;
   const result = await db.query(sql);

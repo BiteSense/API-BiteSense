@@ -7,7 +7,7 @@ const getDataProfile = async (req, res) => {
   const idUser = req.cookies.id_user;
   try {
     const result = await serviceProfile.getAllById(idUser);
-    console.log(result);
+
     if (!result)
       return res.json({
         statusCode: 400,

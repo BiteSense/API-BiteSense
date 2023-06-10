@@ -34,7 +34,6 @@ const getAllFood = async (idUser) => {
     `;
 
   const result = await db.query(sql);
-  console.log(result[0]);
   return result[0];
 };
 const getDataPenyakit = async () => {

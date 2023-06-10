@@ -84,6 +84,7 @@ const insertFood = async (req, res) => {
     });
   }
 };
+
 const insertCondition = async (req, res) => {
   const id_user = req.cookies.id_user;
   try {
