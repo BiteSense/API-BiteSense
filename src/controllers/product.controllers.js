@@ -1,6 +1,7 @@
 const axios = require("axios");
 const product = require("../services/product.services");
 const uploadImage = require("../helpers/upload-image.helpers");
+const { getAllPenyakit, getAllKondisi, getAllFood } = require("../services/preference.services");
 
 const getScannedProduct = async (req, res) => {
   const jumlah_scan_produk = req.cookies.jumlah_scan_produk;
@@ -85,7 +86,10 @@ const uploadProductScan = async (req, res) => {
     const { data } = await axios.get("https://tf-bitesense-4q6q5fibya-et.a.run.app/prediction", { params: { url: imageUrl } });
     const label = JSON.parse(data[1].body);
 
-    const result = await product.create(label.text, id_user);
+    const penyakitUser = await getAllPenyakit(id_user);
+    const kondisiUser = await getAllKondisi(id_user);
+    const foodUser = await getAllFood(id_user);
+    const result = await product.create(label.text, penyakitUser, kondisiUser, foodUser, id_user);
     res.cookie("jumlah_scan_produk", label.text.length);
     res.status(result.statusCode).json(result);
   } catch (error) {

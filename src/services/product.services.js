@@ -20,7 +20,7 @@ const findScan = async (jumlah_scan_produk, id_user) => {
 };
 
 const findAll = async (id_user) => {
-  const query = `SELECT * FROM produk LEFT JOIN detail_produk ON produk.id_detail = detail_produk.id_detail WHERE id_user = ?`;
+  const query = `SELECT * FROM produk LEFT JOIN detail_produk ON produk.id_detail = detail_produk.id_detail WHERE id_user = ? ORDER BY id_produk DESC`;
   const result = await db.query(query, { replacements: [id_user] });
 
   if (!result[0]) {
@@ -86,6 +86,7 @@ const findAllByFavorite = async (id_user) => {
       message: "Get Data Product Favorite Failed",
     };
   }
+
   return {
     statusCode: 200,
     status: "success",
@@ -94,10 +95,10 @@ const findAllByFavorite = async (id_user) => {
   };
 };
 
-const create = async (products, id_user) => {
+const create = async (products, penyakitUser, kondisiUser, foodUser, id_user) => {
   for (let i = 0; i < products.length; i++) {
-    const query = `SELECT id_detail from detail_produk WHERE nama_produk = ?`;
-    const result = await db.query(query, { replacements: [products[i]] });
+    const query = `SELECT id_detail, alergen_produk from detail_produk WHERE nama_produk = ?`;
+    const result = await db.query(query, { replacements: [products[0]] });
 
     if (!result[0][0]) {
       return {
@@ -107,8 +108,57 @@ const create = async (products, id_user) => {
       };
     }
 
-    const query1 = `INSERT INTO produk (nama_produk, foto_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?,?)`;
-    const result1 = await db.query(query1, { replacements: [products[i], "https://storage.googleapis.com/staging_product/default-profile.jpg", null, false, id_user, result[0][0].id_detail] });
+    const alergen_produk = result[0][0].alergen_produk.split(",");
+    let counter = 0;
+    let alert = 0;
+    if (penyakitUser !== undefined) {
+      for (let i = 0; i < penyakitUser.length; i++) {
+        const triger_penyakit = penyakitUser[i].triger_penyakit.split(",");
+        for (let j = 0; j < triger_penyakit.length; j++) {
+          if (alergen_produk.includes(triger_penyakit[j])) {
+            counter++;
+            alert = 2;
+            break;
+          }
+        }
+      }
+    }
+
+    if (counter == 0) {
+      if (foodUser !== undefined) {
+        for (let i = 0; i < foodUser.length; i++) {
+          const triger_food = foodUser[i].triger_food.split(",");
+          for (let j = 0; j < triger_food.length; j++) {
+            if (alergen_produk.includes(triger_food[j])) {
+              counter++;
+              alert = 2;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (counter == 0) {
+      if (kondisiUser !== undefined) {
+        for (let i = 0; i < kondisiUser.length; i++) {
+          const triger_kondisi = kondisiUser[i].triger_condition.split(",");
+          for (let j = 0; j < triger_kondisi.length; j++) {
+            if (alergen_produk.includes(triger_kondisi[j])) {
+              counter++;
+            }
+          }
+          if (counter > 0 && counter == triger_kondisi.length) {
+            alert = 2;
+          } else {
+            alert = 1;
+          }
+        }
+      }
+    }
+
+    const query1 = `INSERT INTO produk (nama_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?)`;
+    const result1 = await db.query(query1, { replacements: [products[i], alert, false, id_user, result[0][0].id_detail] });
 
     if (!result1) {
       return {
