@@ -1,7 +1,7 @@
 const googlCloud = require("../configs/cloud-storage.configs");
 const util = require("util");
 
-const bucketName = "image-product-12";
+const bucketName = "bitesense_storage";
 
 const bucket = googlCloud.bucket(bucketName);
 

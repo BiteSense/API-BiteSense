@@ -113,7 +113,7 @@ const create = async (products, penyakitUser, kondisiUser, foodUser, id_user) =>
     let alert = 0;
     if (penyakitUser !== undefined) {
       for (let i = 0; i < penyakitUser.length; i++) {
-        const triger_penyakit = penyakitUser[i].triger_penyakit.split(",");
+        const triger_penyakit = penyakitUser[i].penyakit.split(",");
         for (let j = 0; j < triger_penyakit.length; j++) {
           if (alergen_produk.includes(triger_penyakit[j])) {
             counter++;
@@ -127,7 +127,7 @@ const create = async (products, penyakitUser, kondisiUser, foodUser, id_user) =>
     if (counter == 0) {
       if (foodUser !== undefined) {
         for (let i = 0; i < foodUser.length; i++) {
-          const triger_food = foodUser[i].triger_food.split(",");
+          const triger_food = foodUser[i].food.split(",");
           for (let j = 0; j < triger_food.length; j++) {
             if (alergen_produk.includes(triger_food[j])) {
               counter++;
@@ -142,7 +142,7 @@ const create = async (products, penyakitUser, kondisiUser, foodUser, id_user) =>
     if (counter == 0) {
       if (kondisiUser !== undefined) {
         for (let i = 0; i < kondisiUser.length; i++) {
-          const triger_kondisi = kondisiUser[i].triger_condition.split(",");
+          const triger_kondisi = kondisiUser[i].kondisi.split(",");
           for (let j = 0; j < triger_kondisi.length; j++) {
             if (alergen_produk.includes(triger_kondisi[j])) {
               counter++;
