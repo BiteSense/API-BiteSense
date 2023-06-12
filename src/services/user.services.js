@@ -32,13 +32,6 @@ const registerUser = async (username, email, hashPassword) => {
   return result;
 };
 
-const getAllByToken = async (token) => {
-  const sql = `SELECT token FROM users WHERE token = '${token}'`;
-  const result = await db.query(sql);
-
-  return result[0][0];
-};
-
 const clearToken = async (id_user) => {
   const sql = `UPDATE users SET token = NULL WHERE id_user = '${id_user}'`;
   const result = await db.query(sql);
@@ -51,6 +44,5 @@ module.exports = {
   getAllByEmail,
   updateUserToken,
   registerUser,
-  getAllByToken,
   clearToken,
 };

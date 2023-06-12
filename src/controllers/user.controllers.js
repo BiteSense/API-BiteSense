@@ -86,22 +86,8 @@ const handlerLogin = async (req, res) => {
 };
 const handlerLogout = async (req, res) => {
   try {
-    const token = req.cookies.token;
-    if (!token)
-      return res.status(204).json({
-        statusCode: 204,
-        status: "error",
-        message: "Unauthorize",
-      });
-
-    const data = await service.getAllByToken(token);
-    if (!data)
-      return res.status(204).json({
-        status: 204,
-        status: "error",
-        message: "Unauthorize",
-      });
-    await service.clearToken(data.id_user);
+    const id_user = req.cookies.id_user;
+    await service.clearToken(id_user);
 
     res.clearCookie("id_user");
     res.clearCookie("jumlah_scan_produk");
