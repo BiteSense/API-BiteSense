@@ -87,7 +87,7 @@ const uploadProductScan = async (req, res, next) => {
     file.originalname = `${Date.now()}${id_user}${file.originalname}`;
     const image_url = await upload_image(file);
 
-    const { data } = await axios.get("https://bitesense-model-pzlrrpolma-et.a.run.app/prediction", { params: { url: image_url } });
+    const { data } = await axios.get(process.env.PREDICT_URL, { params: { url: image_url } });
     const label = JSON.parse(data[1].body);
 
     const penyakit_user = await getAllPenyakit(id_user);
