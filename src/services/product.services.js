@@ -4,8 +4,17 @@ const findScan = async (jumlah_scan_produk, id_user) => {
   const query = `SELECT * FROM produk LEFT JOIN detail_produk ON produk.id_detail = detail_produk.id_detail WHERE id_user = ? ORDER BY id_produk DESC LIMIT ${jumlah_scan_produk}`;
   const result = await db.query(query, { replacements: [id_user] });
 
+  if (result[0].length == 0) {
+    return {
+      statusCode: 400,
+      status: "error",
+      message: "Product not Recognized",
+    };
+  }
+
   if (!result[0]) {
     return {
+      statusCode: 400,
       status: "error",
       message: "Get Data Product Scanned Failed",
     };
@@ -25,6 +34,7 @@ const findAll = async (id_user) => {
 
   if (!result[0]) {
     return {
+      statusCode: 400,
       status: "error",
       message: "Get Data All Product Failed",
     };
@@ -63,6 +73,7 @@ const findLastScan = async (id_user) => {
 
   if (!result[0]) {
     return {
+      statusCode: 400,
       status: "error",
       message: "Get Data Product LastScanned Failed",
     };
@@ -82,6 +93,7 @@ const findAllByFavorite = async (id_user) => {
 
   if (!result[0]) {
     return {
+      statusCode: 400,
       status: "error",
       message: "Get Data Product Favorite Failed",
     };
@@ -95,41 +107,34 @@ const findAllByFavorite = async (id_user) => {
   };
 };
 
-const create = async (products, penyakitUser, kondisiUser, foodUser, id_user) => {
-  for (let i = 0; i < products.length; i++) {
-    const query = `SELECT id_detail, alergen_produk from detail_produk WHERE nama_produk = ?`;
-    const result = await db.query(query, { replacements: [products[0]] });
+const create = async (products, penyakit_user, kondisi_user, food_user, id_user) => {
+  if (products.length == 0) {
+    return {
+      statusCode: 400,
+      status: "error",
+      message: "Product not Recognized",
+    };
+  } else {
+    for (let i = 0; i < products.length; i++) {
+      const query = `SELECT id_detail, alergen_produk from detail_produk WHERE nama_produk = ?`;
+      const result = await db.query(query, { replacements: [products[0]] });
 
-    if (!result[0][0]) {
-      return {
-        statusCode: 404,
-        status: "error",
-        message: "Product Name Incorrect",
-      };
-    }
-
-    const alergen_produk = result[0][0].alergen_produk.split(",");
-    let counter = 0;
-    let alert = 0;
-    if (penyakitUser !== undefined) {
-      for (let i = 0; i < penyakitUser.length; i++) {
-        const triger_penyakit = penyakitUser[i].penyakit.split(",");
-        for (let j = 0; j < triger_penyakit.length; j++) {
-          if (alergen_produk.includes(triger_penyakit[j])) {
-            counter++;
-            alert = 2;
-            break;
-          }
-        }
+      if (!result[0][0]) {
+        return {
+          statusCode: 404,
+          status: "error",
+          message: "Product Name Incorrect",
+        };
       }
-    }
 
-    if (counter == 0) {
-      if (foodUser !== undefined) {
-        for (let i = 0; i < foodUser.length; i++) {
-          const triger_food = foodUser[i].food.split(",");
-          for (let j = 0; j < triger_food.length; j++) {
-            if (alergen_produk.includes(triger_food[j])) {
+      const alergen_produk = result[0][0].alergen_produk.split(",");
+      let counter = 0;
+      let alert = 0;
+      if (penyakit_user !== undefined) {
+        for (let i = 0; i < penyakit_user.length; i++) {
+          const triger_penyakit = penyakit_user[i].penyakit.split(",");
+          for (let j = 0; j < triger_penyakit.length; j++) {
+            if (alergen_produk.includes(triger_penyakit[j])) {
               counter++;
               alert = 2;
               break;
@@ -137,34 +142,50 @@ const create = async (products, penyakitUser, kondisiUser, foodUser, id_user) =>
           }
         }
       }
-    }
 
-    if (counter == 0) {
-      if (kondisiUser !== undefined) {
-        for (let i = 0; i < kondisiUser.length; i++) {
-          const triger_kondisi = kondisiUser[i].kondisi.split(",");
-          for (let j = 0; j < triger_kondisi.length; j++) {
-            if (alergen_produk.includes(triger_kondisi[j])) {
-              counter++;
+      if (counter == 0) {
+        if (food_user !== undefined) {
+          for (let i = 0; i < food_user.length; i++) {
+            const triger_food = food_user[i].food.split(",");
+            for (let j = 0; j < triger_food.length; j++) {
+              if (alergen_produk.includes(triger_food[j])) {
+                counter++;
+                alert = 2;
+                break;
+              }
             }
-          }
-          if (counter > 0 && counter == triger_kondisi.length) {
-            alert = 2;
-          } else {
-            alert = 1;
           }
         }
       }
-    }
 
-    const query1 = `INSERT INTO produk (nama_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?)`;
-    const result1 = await db.query(query1, { replacements: [products[i], alert, false, id_user, result[0][0].id_detail] });
+      if (counter == 0) {
+        if (kondisi_user !== undefined) {
+          for (let i = 0; i < kondisi_user.length; i++) {
+            const triger_kondisi = kondisi_user[i].kondisi.split(",");
+            for (let j = 0; j < triger_kondisi.length; j++) {
+              if (alergen_produk.includes(triger_kondisi[j])) {
+                counter++;
+              }
+            }
+            if (counter > 0 && counter == triger_kondisi.length) {
+              alert = 2;
+            } else {
+              alert = 1;
+            }
+          }
+        }
+      }
 
-    if (!result1) {
-      return {
-        status: "error",
-        message: "Failed to Input Product",
-      };
+      const query1 = `INSERT INTO produk (nama_produk, alert, favorite, id_user, id_detail) VALUES (?,?,?,?,?)`;
+      const result1 = await db.query(query1, { replacements: [products[i], alert, false, id_user, result[0][0].id_detail] });
+
+      if (!result1) {
+        return {
+          statusCode: 400,
+          status: "error",
+          message: "Failed to Input Product",
+        };
+      }
     }
   }
 
@@ -212,6 +233,7 @@ const deleteOne = async (id) => {
 
   if (!result) {
     return {
+      statusCode: 400,
       status: "error",
       message: "Failed to Delete Product",
     };
@@ -230,6 +252,7 @@ const deleteAll = async (id_user) => {
 
   if (!result) {
     return {
+      statusCode: 400,
       status: "error",
       message: "Failed to Delete All Product",
     };

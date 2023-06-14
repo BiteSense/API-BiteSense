@@ -1,13 +1,13 @@
-const Cloud = require("@google-cloud/storage");
+const cloud_storage = require("@google-cloud/storage");
 const path = require("path");
 
 // Get Service Key
-const serviceKey = path.join(__dirname, "../keys/serviceKeys.json");
+const service_key = path.join(__dirname, "../keys/serviceKeys.json");
 
-const { Storage } = Cloud;
+const { Storage } = cloud_storage;
 
 const storage = new Storage({
-  keyFilename: serviceKey,
+  keyFilename: service_key,
   projectId: process.env.PROJECT_ID,
 });
 
