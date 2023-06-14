@@ -20,9 +20,9 @@ const scan = async (id_produk) => {
   };
 };
 
-const create = async (id_produk, nama_produk, komposisi_produk, expired, qrcode) => {
-  const query = "INSERT INTO qrcode_produk (id_produk,nama_produk,komposisi_produk,expired,qrcode) VALUES (?,?,?,?,?)";
-  const result = await db.query(query, { replacements: [id_produk, nama_produk, komposisi_produk, expired, qrcode] });
+const create = async (id_produk, nama_produk, komposisi_produk, tgl_produksi, expired, qrcode) => {
+  const query = "INSERT INTO qrcode_produk (id_produk,nama_produk,komposisi_produk,tgl_produksi,expired,qrcode) VALUES (?,?,?,?,?,?)";
+  const result = await db.query(query, { replacements: [id_produk, nama_produk, komposisi_produk, tgl_produksi, expired, qrcode] });
 
   if (!result) {
     return {

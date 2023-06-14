@@ -1,9 +1,9 @@
-const googlCloud = require("../configs/cloud-storage.configs");
+const google_cloud = require("../configs/cloud-storage.configs");
 const util = require("util");
 
-const bucketName = "bitesense_storage";
+const bucket_name = process.env.BUCKET_NAME;
 
-const bucket = googlCloud.bucket(bucketName);
+const bucket = google_cloud.bucket(bucket_name);
 
 const { format } = util;
 
@@ -12,14 +12,14 @@ const uploadImage = (file) =>
     const { originalname, buffer } = file;
     const blob = bucket.file(originalname.replace(/ /g, "_"));
 
-    const blobStream = blob.createWriteStream({
+    const blob_stream = blob.createWriteStream({
       resumable: false,
     });
 
-    blobStream
+    blob_stream
       .on("finish", () => {
-        const publicUrl = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
-        resolve(publicUrl);
+        const public_url = format(`https://storage.googleapis.com/${bucket.name}/${blob.name}`);
+        resolve(public_url);
       })
       .on("error", () => {
         reject("Failed to upload image, something wrong");

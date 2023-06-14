@@ -1,34 +1,34 @@
 const express = require("express");
-const route = express.Router();
-const verifyToken = require("../middlewares/auth.middlewares");
+const routes = express.Router();
+const auth = require("../middlewares/auth.middlewares");
 const myModule = require("../controllers/user.controllers");
 const updateModule = require("../controllers/profile-user.controllers");
 const preferenceModule = require("../controllers/preference.controllers");
 
 // User Routes
-route.post("/register", myModule.handlerRegister);
-route.post("/login", myModule.handlerLogin);
-route.delete("/logout", verifyToken, myModule.handlerLogout);
+routes.post("/register", myModule.handlerRegister);
+routes.post("/login", myModule.handlerLogin);
+routes.delete("/logout", auth, myModule.handlerLogout);
 
-// Profile Routes
-route.get("/profile", verifyToken, updateModule.getDataProfile);
-route.post("/profile/email", verifyToken, updateModule.updateEmail);
-route.post("/profile/telepon", verifyToken, updateModule.updateTelepon);
-route.post("/profile/username", verifyToken, updateModule.updateUsername);
-route.post("/profile/upload", verifyToken, updateModule.updateProfile);
-route.delete("/profile/delete", verifyToken, updateModule.deleteProfile);
+// Profile routess
+routes.get("/profile", auth, updateModule.getDataProfile);
+routes.post("/profile/email", auth, updateModule.updateEmail);
+routes.post("/profile/telepon", auth, updateModule.updateTelepon);
+routes.post("/profile/username", auth, updateModule.updateUsername);
+routes.post("/profile/upload", auth, updateModule.updateProfile);
+routes.delete("/profile/delete", auth, updateModule.deleteProfile);
 
-// Preference Routes
-route.get("/preference", verifyToken, preferenceModule.getPreference);
-route.post("/preference", verifyToken, preferenceModule.insertPreference);
-route.post("/preference/update", verifyToken, preferenceModule.updatePreference);
+// Preference routess
+routes.get("/preference", auth, preferenceModule.getPreference);
+routes.post("/preference", auth, preferenceModule.insertPreference);
+routes.post("/preference/update", auth, preferenceModule.updatePreference);
 // Preference Data
-route.get("/preference/data", verifyToken, preferenceModule.getDataPreference);
+routes.get("/preference/data", auth, preferenceModule.getDataPreference);
 // Category Penyakit
-route.post("/preference/penyakit", verifyToken, preferenceModule.insertPenyakit);
+routes.post("/preference/penyakit", auth, preferenceModule.insertPenyakit);
 // Category Food Intolarance
-route.post("/preference/makanan", verifyToken, preferenceModule.insertFood);
+routes.post("/preference/makanan", auth, preferenceModule.insertFood);
 // Category Condition
-route.post("/preference/kondisi", verifyToken, preferenceModule.insertCondition);
+routes.post("/preference/kondisi", auth, preferenceModule.insertCondition);
 
-module.exports = route;
+module.exports = routes;
