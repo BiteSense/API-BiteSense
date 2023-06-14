@@ -1,20 +1,27 @@
 steps:
   # Build the container image
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/$PROJECT_ID/bitesense-api:$COMMIT_SHA", "."]
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/bitesense-api-v2:$SHORT_SHA", "."]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/$PROJECT_ID/bitesense-api:$COMMIT_SHA"]
+    args: ["push", "gcr.io/$PROJECT_ID/bitesense-api-v2:$SHORT_SHA"]
   # Deploy container image to Cloud Run
   - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
     entrypoint: gcloud
     args:
       - "run"
       - "deploy"
-      - "bitesense-api"
+      - "bitesense-api-v2"
+      - "--platform"
+      - "managed"
       - "--image"
-      - "gcr.io/$PROJECT_ID/bitesense-api:$COMMIT_SHA"
+      - "gcr.io/$PROJECT_ID/bitesense-api-v2:$SHORT_SHA"
       - "--region"
       - "asia-southeast2"
+      - "--allow-unauthenticated"
+      - "--set-env-vars"
+      - "TOKEN_SECRET= $_TOKEN_SECRET, BUCKET_NAME= $_TOKEN_SECRET, PROJECT_ID= $PROJECT_ID, DB_HOST= $_DB_HOST, DB_NAME= $_DB_NAME, DB_USER= $_DB_USER, DB_PASS= $_DB_PASS"
+      - "--max-instances"
+      - "5"
 images:
-  - "gcr.io/$PROJECT_ID/bitesense-api:$COMMIT_SHA"
+  - "gcr.io/$PROJECT_ID/bitesense-api-v2:$SHORT_SHA"
