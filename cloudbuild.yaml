@@ -20,7 +20,7 @@ steps:
       - "asia-southeast2"
       - "--allow-unauthenticated"
       - "--set-env-vars"
-      - "TOKEN_SECRET= $_TOKEN_SECRET, BUCKET_NAME= $_BUCKET_NAME, PROJECT_ID= $PROJECT_ID, DB_HOST= $_DB_HOST, DB_NAME= $_DB_NAME, DB_USER= $_DB_USER, DB_PASS= $_DB_PASS"
+      - "TOKEN_SECRET=$_TOKEN_SECRET, BUCKET_NAME=$_BUCKET_NAME, PROJECT_ID=$PROJECT_ID, DB_HOST=$_DB_HOST, DB_NAME=$_DB_NAME, DB_USER=$_DB_USER, DB_PASS=$_DB_PASS, PREDICT_URL=$_PREDICT_URL"
       - "--max-instances"
       - "5"
 images:
