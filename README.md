@@ -16,9 +16,11 @@ Tutorials, get you started with understanding and using the Bitesense-Api:
 
 - [Auth](###Auth)
 - [Auth-Register](###Register)
-- [Auth-Logout](###Logout)
+- [Auth-Logout](#Logout)
 
 ## Documentation:
+
+<a name="Auth"></a>
 
 ### Auth
 
@@ -60,6 +62,8 @@ Signin user if already have an account. Return a token to use authenticate and a
 }
 ```
 
+<a name="Register"></a>
+
 ### Register
 
 ```http
@@ -96,6 +100,8 @@ Create user if any user already have an account.
     "message": "Email Already Excist"
 }
 ```
+
+<a name="Logout"></a>
 
 ### Logout
 
