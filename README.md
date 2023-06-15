@@ -24,7 +24,7 @@ Tutorials, get you started with understanding and using the Bitesense-Api:
 
 <a name="Auth"></a>
 
-### Auth
+### Login
 
 All request require API key. You can find your Api key if you Login. Signin user if already have an account. Return a token to use authenticate and authorization.
 
