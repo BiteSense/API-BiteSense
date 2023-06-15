@@ -1,4 +1,6 @@
 steps:
+  - name: gcr.io/cloud-builders/gsutil
+    args: ["cp", "gs://bitesense-key/serviceKeys.json", "serviceKeys.json"]
   # Build the container image
   - name: "gcr.io/cloud-builders/docker"
     args: ["build", "--network=cloudbuild", "-t", "gcr.io/$PROJECT_ID/bitesense-api-v2:$SHORT_SHA", "."]
