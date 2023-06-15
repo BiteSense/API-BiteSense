@@ -13,6 +13,7 @@ RUN npm install
 # RUN npm i --omit=dev
 
 # Bundle app source
+COPY ./serviceKeys.json ./src/keys/serviceKeys.json
 COPY . .
 
 EXPOSE 8080
