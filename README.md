@@ -14,10 +14,10 @@ The Bitesense-Api interacts with the client-side [Mobile-Dev](https://github.com
 
 Tutorials, get you started with understanding and using the Bitesense-Api:
 
-- [Auth](#Auth)
+- [Auth-Login](#Auth)
 - [Auth-Register](#Register)
 - [Auth-Logout](#Logout)
-- [Profile-Get Data](#getDataProfile)
+- [Profile-Get Data User](#getDataProfile)
 - [Profile-Get Data Preference User](#preference)
 
 ## Documentation:
