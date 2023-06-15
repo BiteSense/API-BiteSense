@@ -1,10 +1,10 @@
 # BiteSense-Api
 
-The Bitesense-Api interacts with the client-side-[Mobile-Dev](https://github.com/BiteSense/mobile-dev) and [Machine-Learning](https://github.com/BiteSense/object-detection-model-development),to serving various request from client-side then bridges the requests from client to Machine-Learning
+The Bitesense-Api interacts with the client-side [Mobile-Dev](https://github.com/BiteSense/mobile-dev) and [Machine-Learning](https://github.com/BiteSense/object-detection-model-development), to serving various request from client-side then bridges the requests from client-side to Machine-Learning model
 
 ### Cloud-Architecture:
 
-![cloud_arch](assets/cloud-architecture.png)
+![cloud_arch](assets/cloud_architecture.png)
 
 |       Collection       |                                                                                                                                                                   Postman Link                                                                                                                                                                    |
 | :--------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
