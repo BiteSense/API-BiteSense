@@ -13,8 +13,8 @@ RUN npm install
 # RUN npm i --omit=dev
 
 # Bundle app source
+COPY ./serviceKeys.json ./src/keys/serviceKeys.json
 COPY . .
-COPY ./serviceKeys.json /keys/serviceKeys.json
 
 EXPOSE 8080
 CMD [ "node", "index.js" ]
