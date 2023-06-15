@@ -14,9 +14,11 @@ The Bitesense-Api interacts with the client-side [Mobile-Dev](https://github.com
 
 Tutorials, get you started with understanding and using the Bitesense-Api:
 
-- [Auth](###Auth)
-- [Auth-Register](###Register)
+- [Auth](#Auth)
+- [Auth-Register](#Register)
 - [Auth-Logout](#Logout)
+- [Profile-Get Data](#getDataProfile)
+- [Profile-Get Data Preference User](#preference)
 
 ## Documentation:
 
@@ -24,7 +26,7 @@ Tutorials, get you started with understanding and using the Bitesense-Api:
 
 ### Auth
 
-All request require API key. You can find your Api key if you Login.
+All request require API key. You can find your Api key if you Login. Signin user if already have an account. Return a token to use authenticate and authorization.
 
 ```http
 POST api/users/login
@@ -36,8 +38,6 @@ POST api/users/login
 | `password` | `string` | **Required**. |
 
 ### Response
-
-Signin user if already have an account. Return a token to use authenticate and authorization.
 
 `SUCCESS`
 
@@ -66,6 +66,8 @@ Signin user if already have an account. Return a token to use authenticate and a
 
 ### Register
 
+Create user if any user already have an account.
+
 ```http
 POST api/users/logout
 ```
@@ -78,8 +80,6 @@ POST api/users/logout
 | `username`   | `string` | **Required**. |
 
 ### Response
-
-Create user if any user already have an account.
 
 `SUCCESS`
 
@@ -118,5 +118,73 @@ DELETE api/users/register
     "statusCode": 200,
     "status": "success",
     "message": "Logout berhasil"
+}
+```
+
+<a name="getDataProfile"></a>
+
+### Get Data Profile
+
+```http
+GET api/users/profile
+```
+
+### Response
+
+`SUCCESS`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "Success Get Data User",
+    "data": {
+        "result": {
+            "username": "chris",
+            "email": "check@gmail.com",
+            "no_telepon": null,
+            "foto_user": "https://storage.googleapis.com/staging_product/default-profile.jpg"
+        }
+    }
+}
+```
+
+<a name="preference"></a>
+
+### Get Data Preference
+
+```http
+GET api/users/preference
+```
+
+### Response
+
+`SUCCESS`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "success get data",
+    "data": {
+        "dataPenyakit": [
+            {
+                "nama_penyakit": "Alergi Kacang",
+                "triger_penyakit": "Kacang"
+            },
+        ],
+        "dataKondisi": [
+            {
+                "name_condition": "Diabetes",
+                "triger_condition": "Gula,Fruktosa"
+            },
+        ],
+        "dataFood": [
+            {
+                "name_food": "Dairy",
+                "triger_food": "Laktosa"
+            },
+        ]
+    }
 }
 ```
