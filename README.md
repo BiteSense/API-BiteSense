@@ -19,12 +19,13 @@ Tutorials, get you started with understanding and using the Bitesense-Api:
 - [Auth-Logout](#Logout)
 - [Profile-Get Data User](#getDataProfile)
 - [Profile-Get Data Preference User](#preference)
+- [Profile-Change Profile](#profile)
 
 ## Documentation:
 
 <a name="Auth"></a>
 
-### Login
+### `Login`
 
 All request require API key. You can find your Api key if you Login. Signin user if already have an account. Return a token to use authenticate and authorization.
 
@@ -64,7 +65,7 @@ POST api/users/login
 
 <a name="Register"></a>
 
-### Register
+### `Register`
 
 Create user if any user already have an account.
 
@@ -103,7 +104,7 @@ POST api/users/logout
 
 <a name="Logout"></a>
 
-### Logout
+### `Logout`
 
 ```http
 DELETE api/users/register
@@ -123,7 +124,7 @@ DELETE api/users/register
 
 <a name="getDataProfile"></a>
 
-### Get Data Profile
+### `Get Data Profile`
 
 ```http
 GET api/users/profile
@@ -185,6 +186,66 @@ GET api/users/preference
                 "triger_food": "Laktosa"
             },
         ]
+    }
+}
+```
+
+<a name="profile"></a>
+
+### `Change Profile`
+
+```http
+POST api/users/profile
+```
+
+| Request                           | Type     | Description   | Parameter  | Status |
+| :-------------------------------- | :------- | :------------ | :--------- | :----- |
+| `POST api/users/profile/email`    | `string` | **Required**. | `email`    | `Ok`   |
+| `POST api/users/profile/username` | `string` | **Required**. | `username` | `Ok`   |
+| `POST api/users/profile/telepon`  | `string` | **Required**. | `telepon`  | `Ok`   |
+| `POST api/users/profile/upload`   | `file`   | **Required**. | `file`     | `Ok`   |
+
+### Response
+
+`SUCCESS - Email`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "berhasil mengubah email"
+}
+```
+
+`SUCCESS - Username`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "berhasil mengubah username"
+}
+```
+
+`SUCCESS - Telepon`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "berhasil mengubah nomor telepon"
+}
+```
+
+`SUCCESS - Photo Profile`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "success upload image",
+    "data": {
+        "publicUrl": "https://storage.googleapis.com/staging_product/168525472329231619github.png"
     }
 }
 ```
