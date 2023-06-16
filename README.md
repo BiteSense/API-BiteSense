@@ -27,7 +27,7 @@ Before running the project locally or deploying it, make sure you have the follo
 
 |       Collection       |                                                                                                                                                                   Postman Link                                                                                                                                                                    |
 | :--------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| Backend API collection | [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/23098382-8a216f89-ea1c-435c-ab14-e8ba5dec13ef?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D23098382-8a216f89-ea1c-435c-ab14-e8ba5dec13ef%26entityType%3Dcollection%26workspaceId%3Def567bd0-b3cb-4f29-84a0-6c0994418fad) |
+| Backend API collection | [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/23098382-8a216f89-ea1c-435c-ab14-e8ba5dec13ef?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D23098382-8a216f89-ea1c-435c-ab14-e8ba5dec13ef%26entityType%3Dcollection%26workspaceId%3Def567bd0-b3cb-4f29-84a0-6c0994418fad) |
 
 ## Getting Started:
 
@@ -52,6 +52,7 @@ Follow the steps below to get the backend API up and running:
    ```bash
    npm install
    ```
+
 5. Set Up database MySQL in phpMyAdmin according to the following specifications <a href="https://github.com/BiteSense/bitesense-api/blob/main/assets/database_model.png">BiteSense Database</a>
 
 6. Set up the environment variables by creating a .env file in the root directory. Use the .env.example file as a template and provide the necessary values.
@@ -62,7 +63,7 @@ Follow the steps below to get the backend API up and running:
    npm run start
    ```
 
-6. The API should now be accessible at <http://localhost:8080>.
+8. The API should now be accessible at <http://localhost:8080>.
 
 Tutorials, get you started with understanding and using the Bitesense-Api:
 
