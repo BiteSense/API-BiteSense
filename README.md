@@ -267,6 +267,47 @@ POST api/users/profile
 
 ### `Input Preference User`
 
+for Input preferences and also Update Preferences use a body with a request of type json then the number listed on the request body json is a numbering index which can be seen in the following table
+
+`Category Food Intolarance`
+
+| Name Food         | Index |
+| :---------------- | :---- |
+| `Dairy`           | 1     |
+| `Gluten`          | 2     |
+| `Kafein`          | 3     |
+| `Fruktosa`        | 4     |
+| `Biji Bijian`     | 5     |
+| `MSG`             | 6     |
+| `Salicylates`     | 7     |
+| `Ragi`            | 8     |
+| `Pewarna Makanan` | 9     |
+
+`Category Condition`
+
+| Name Food    | Index |
+| :----------- | :---- |
+| `Diabetes`   | 1     |
+| `Hipertensi` | 2     |
+| `Hamil`      | 3     |
+| `Obesitas`   | 4     |
+| `Maag`       | 5     |
+| `Stroke`     | 6     |
+| `Asam Urat`  | 7     |
+
+`Category Disease`
+
+| Name Food             | Index |
+| :-------------------- | :---- |
+| `Alergi Kacang`       | 1     |
+| `Alergi Telur`        | 2     |
+| `Alergi Kedelai`      | 3     |
+| `Alergi Gandum`       | 4     |
+| `Alergi Ikan`         | 5     |
+| `Alergi Susu`         | 6     |
+| `Alergi Shellfish`    | 7     |
+| `Alergi Kacang Pohon` | 8     |
+
 ```http
 POST api/users/preference
 ```
@@ -310,6 +351,47 @@ POST api/users/preference
 <a name="preferenceUpdate"></a>
 
 ### `Update Preference User`
+
+for Input preferences and also Update Preferences use a body with a request of type json then the number listed on the request body json is a numbering index which can be seen in the following table
+
+`Category Food Intolarance`
+
+| Name Food         | Index |
+| :---------------- | :---- |
+| `Dairy`           | 1     |
+| `Gluten`          | 2     |
+| `Kafein`          | 3     |
+| `Fruktosa`        | 4     |
+| `Biji Bijian`     | 5     |
+| `MSG`             | 6     |
+| `Salicylates`     | 7     |
+| `Ragi`            | 8     |
+| `Pewarna Makanan` | 9     |
+
+`Category Condition`
+
+| Name Food    | Index |
+| :----------- | :---- |
+| `Diabetes`   | 1     |
+| `Hipertensi` | 2     |
+| `Hamil`      | 3     |
+| `Obesitas`   | 4     |
+| `Maag`       | 5     |
+| `Stroke`     | 6     |
+| `Asam Urat`  | 7     |
+
+`Category Disease`
+
+| Name Food             | Index |
+| :-------------------- | :---- |
+| `Alergi Kacang`       | 1     |
+| `Alergi Telur`        | 2     |
+| `Alergi Kedelai`      | 3     |
+| `Alergi Gandum`       | 4     |
+| `Alergi Ikan`         | 5     |
+| `Alergi Susu`         | 6     |
+| `Alergi Shellfish`    | 7     |
+| `Alergi Kacang Pohon` | 8     |
 
 ```http
 POST api/users/update
