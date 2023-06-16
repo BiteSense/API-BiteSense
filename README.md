@@ -33,33 +33,36 @@ Before running the project locally or deploying it, make sure you have the follo
 
 Follow the steps below to get the backend API up and running:
 
-1. Clone this repository to your local machine:
+1. Make sure you have success deploy Machine Learning Model in <a href="https://github.com/BiteSense/object-detection-model-deployment.git">here</a>
+
+2. Clone this repository to your local machine:
 
    ```bash
    git clone https://github.com/BiteSense/bitesense-api.git
    ```
 
-2. Navigate to the project directory:
+3. Navigate to the project directory:
 
    ```bash
    cd bitesense-api
    ```
 
-3. Install the required dependencies:
+4. Install the required dependencies:
 
    ```bash
    npm install
    ```
+5. Set Up database MySQL in phpMyAdmin according to the following specifications <a href="https://github.com/BiteSense/bitesense-api/blob/main/assets/database_model.png">BiteSense Database</a>
 
-4. Set up the environment variables by creating a .env file in the root directory. Use the .env.example file as a template and provide the necessary values.
+6. Set up the environment variables by creating a .env file in the root directory. Use the .env.example file as a template and provide the necessary values.
 
-5. Start the development server:
+7. Start the development server:
 
    ```bash
-   npm run index.js
+   npm run start
    ```
 
-6. The API should now be accessible at <http://localhost:3000>.
+6. The API should now be accessible at <http://localhost:8080>.
 
 Tutorials, get you started with understanding and using the Bitesense-Api:
 
