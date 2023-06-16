@@ -20,6 +20,8 @@ Tutorials, get you started with understanding and using the Bitesense-Api:
 - [Profile-Get Data User](#getDataProfile)
 - [Profile-Get Data Preference User](#preference)
 - [Profile-Change Profile](#profile)
+- [Preference-Input Preference User](#preferenceInput)
+- [Preference-Update Preference User](#preferenceUpdate)
 
 ## Documentation:
 
@@ -258,5 +260,93 @@ POST api/users/profile
     "statusCode": 200,
     "status": "success",
     "message": "succes delete profile"
+}
+```
+
+<a name="preferenceInput"></a>
+
+### `Input Preference User`
+
+```http
+POST api/users/preference
+```
+
+### Request
+
+`SUCCESS`
+
+```javascript
+{
+    "penyakit" : [
+        {"id" : 2},
+        {"id" : 3},
+        {"id" : 5}
+    ],
+    "makanan" : [
+        {"id" : 1},
+        {"id" : 3},
+        {"id" : 5}
+    ],
+    "kondisi" : [
+        {"id" : 2},
+        {"id" : 1},
+        {"id" : 4}
+    ]
+}
+```
+
+### Response
+
+`SUCCESS`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "Success Input Data Preference User"
+}
+```
+
+<a name="preferenceUpdate"></a>
+
+### `Update Preference User`
+
+```http
+POST api/users/update
+```
+
+### Request
+
+`SUCCESS`
+
+```javascript
+{
+    "penyakit" : [
+        {"id" : 2},
+        {"id" : 3},
+        {"id" : 5}
+    ],
+    "makanan" : [
+        {"id" : 1},
+        {"id" : 3},
+        {"id" : 5}
+    ],
+    "kondisi" : [
+        {"id" : 2},
+        {"id" : 1},
+        {"id" : 4}
+    ]
+}
+```
+
+### Response
+
+`SUCCESS`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "Success Update Data Preference User"
 }
 ```
