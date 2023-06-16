@@ -204,6 +204,7 @@ POST api/users/profile
 | `POST api/users/profile/username` | `string` | **Required**. | `username` | `Ok`   |
 | `POST api/users/profile/telepon`  | `string` | **Required**. | `telepon`  | `Ok`   |
 | `POST api/users/profile/upload`   | `file`   | **Required**. | `file`     | `Ok`   |
+| `DELETE api/users/profile/delete` | `NONE`   | **Required**. | `NONE`     | `Ok`   |
 
 ### Response
 
@@ -247,5 +248,15 @@ POST api/users/profile
     "data": {
         "publicUrl": "https://storage.googleapis.com/staging_product/168525472329231619github.png"
     }
+}
+```
+
+`SUCCESS - Delete Photo Profile`
+
+```javascript
+{
+    "statusCode": 200,
+    "status": "success",
+    "message": "succes delete profile"
 }
 ```
