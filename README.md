@@ -2,6 +2,25 @@
 
 The Bitesense-Api interacts with the client-side [Mobile-Dev](https://github.com/BiteSense/mobile-dev) and [Machine-Learning](https://github.com/BiteSense/object-detection-model-development), to serving various request from client-side then bridges the requests from client-side to Machine-Learning model
 
+## Features
+
+- Deployed on Google Cloud Platform using Cloud Run for scalability.
+- Built with Node.js and Express framework.
+- Utilizes Google Cloud services such as Cloud SQL and Cloud Storage.
+- Implements a machine learning model for object detection
+- Provides CRUD operations for product,users items.
+
+## Prerequisites
+
+Before running the project locally or deploying it, make sure you have the following prerequisites installed:
+
+- Node.js (v16 or above)
+- npm package manager
+- Google Cloud Platform account with enabled services:
+  - Cloud Run
+  - Cloud SQL
+  - Cloud Storage
+
 ## Cloud-Architecture:
 
 ![cloud_arch](assets/cloud_architecture.png)
@@ -11,6 +30,36 @@ The Bitesense-Api interacts with the client-side [Mobile-Dev](https://github.com
 | Backend API collection | [![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/23098382-29753a34-0729-4aea-9324-2080d7026097?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D23098382-29753a34-0729-4aea-9324-2080d7026097%26entityType%3Dcollection%26workspaceId%3D8d48ecb2-5360-4889-a18a-58ed2c0cd770) |
 
 ## Getting Started:
+
+Follow the steps below to get the backend API up and running:
+
+1. Clone this repository to your local machine:
+
+   ```bash
+   git clone https://github.com/BiteSense/bitesense-api.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd bitesense-api
+   ```
+
+3. Install the required dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Set up the environment variables by creating a .env file in the root directory. Use the .env.example file as a template and provide the necessary values.
+
+5. Start the development server:
+
+   ```bash
+   npm run index.js
+   ```
+
+6. The API should now be accessible at <http://localhost:3000>.
 
 Tutorials, get you started with understanding and using the Bitesense-Api:
 
